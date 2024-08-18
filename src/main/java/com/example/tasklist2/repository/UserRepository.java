@@ -2,8 +2,6 @@ package com.example.tasklist2.repository;
 
 
 import com.example.tasklist2.domain.user.User;
-
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -5,7 +5,7 @@ import com.example.tasklist2.web.dto.user.UserDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper extends Mappable<User,UserDto>{
+public interface UserMapper extends Mappable<User, UserDto> {
 
 
 }

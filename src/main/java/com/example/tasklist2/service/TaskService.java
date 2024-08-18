@@ -18,5 +18,5 @@ public interface TaskService {
 
     void delete(Long id);
 
-    void  uploadImage(Long id, TaskImage image);
+    void uploadImage(Long id, TaskImage image);
 }

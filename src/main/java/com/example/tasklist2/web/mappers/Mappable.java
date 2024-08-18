@@ -2,8 +2,9 @@ package com.example.tasklist2.web.mappers;
 
 import java.util.List;
 
-public interface Mappable<E,D>{
+public interface Mappable<E, D> {
     D toDto(E entity);
+
     List<D> toDto(List<E> entity);
 
     E toEntity(D dto);

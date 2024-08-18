@@ -18,19 +18,19 @@ public class ControllerAdvice {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ExceptionBody handleResourceNotFound(ResourceNotFoundException e){
+    public ExceptionBody handleResourceNotFound(ResourceNotFoundException e) {
         return new ExceptionBody(e.getMessage());
     }
 
     @ExceptionHandler(ResourceMappingException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ExceptionBody handleResourceMapping(ResourceMappingException e){
+    public ExceptionBody handleResourceMapping(ResourceMappingException e) {
         return new ExceptionBody(e.getMessage());
     }
 
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExceptionBody handleIllegalState(IllegalStateException e){
+    public ExceptionBody handleIllegalState(IllegalStateException e) {
         return new ExceptionBody(e.getMessage());
     }
 
@@ -45,17 +45,17 @@ public class ControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExceptionBody handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+    public ExceptionBody handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         ExceptionBody exceptionBody = new ExceptionBody("Validation failed");
         List<FieldError> errors = e.getBindingResult().getFieldErrors();
         exceptionBody.setErrors(errors.stream()
-                .collect(Collectors.toMap(FieldError::getField,FieldError::getDefaultMessage)));
+                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage)));
         return exceptionBody;
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExceptionBody handleConstraintViolationException(ConstraintViolationException e){
+    public ExceptionBody handleConstraintViolationException(ConstraintViolationException e) {
         ExceptionBody exceptionBody = new ExceptionBody("Validation failed");
         exceptionBody.setErrors(e.getConstraintViolations().stream()
                 .collect(Collectors.toMap(
@@ -66,24 +66,24 @@ public class ControllerAdvice {
 
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExceptionBody handleAuthentication(AuthenticationException e){
+    public ExceptionBody handleAuthentication(AuthenticationException e) {
 
         return new ExceptionBody("Authentication failed");
     }
+
     @ExceptionHandler(ImageUploadException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExceptionBody handleImageUpload(ImageUploadException e){
+    public ExceptionBody handleImageUpload(ImageUploadException e) {
         return new ExceptionBody(e.getMessage());
     }
 
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ExceptionBody handleException(Exception e){
+    public ExceptionBody handleException(Exception e) {
         e.printStackTrace();
         return new ExceptionBody("Internal error.");
     }
-
 
 
 }

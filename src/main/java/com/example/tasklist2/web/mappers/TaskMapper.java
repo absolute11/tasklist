@@ -4,10 +4,8 @@ import com.example.tasklist2.domain.task.Task;
 import com.example.tasklist2.web.dto.task.TaskDto;
 import org.mapstruct.Mapper;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
-public interface TaskMapper extends Mappable<Task,TaskDto>{
+public interface TaskMapper extends Mappable<Task, TaskDto> {
 
 
 }
