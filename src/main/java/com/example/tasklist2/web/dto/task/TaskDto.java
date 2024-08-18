@@ -15,12 +15,18 @@ import java.util.List;
 
 @Data
 public class TaskDto {
-    @NotNull(message = "id must be not null.", groups = OnUpdate.class)
+    @NotNull(message = "id must be not null.",
+            groups = OnUpdate.class)
     private Long id;
-    @NotNull(message = "Title must be not null.", groups = OnCreate.class)
-    @Length(max = 255, message = "Title length must be smaller than 255 symbols", groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(message = "Title must be not null.",
+            groups = OnCreate.class)
+    @Length(max = 255, message = "Title length "
+            + "must be smaller than 255 symbols",
+            groups = {OnCreate.class, OnUpdate.class})
     private String title;
-    @Length(max = 255, message = "Title length must be smaller than 255 symbols", groups = {OnCreate.class, OnUpdate.class})
+    @Length(max = 255, message = "Title length must be "
+            + "smaller than 255 symbols",
+            groups = {OnCreate.class, OnUpdate.class})
     private String description;
 
     private Status status;

@@ -54,4 +54,5 @@ public class CustomSecurityExpression {
                 .getAuthentication();
         return (JwtEntity) authentication.getPrincipal();
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.tasklist2.web.security.expression;
 
+
 import com.example.tasklist2.domain.user.Role;
 import com.example.tasklist2.service.UserService;
 import com.example.tasklist2.web.security.JwtEntity;
@@ -66,5 +67,6 @@ public class CustomMethodSecurityExpressionRoot
     public Object getThis() {
         return target;
     }
+
 
 }
