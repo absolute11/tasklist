@@ -21,11 +21,9 @@ import org.springframework.security.access.expression.method.MethodSecurityExpre
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -47,27 +45,32 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
+    public AuthenticationManager authenticationManager(
+            final AuthenticationConfiguration configuration)
             throws Exception {
 
         return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public MethodSecurityExpressionHandler expressionHandler(){
-        DefaultMethodSecurityExpressionHandler expressionHandler = new CustomSecurityExceptionHandler();
+    public MethodSecurityExpressionHandler
+    expressionHandler() {
+        DefaultMethodSecurityExpressionHandler expressionHandler =
+                new CustomSecurityExceptionHandler();
         expressionHandler.setApplicationContext(applicationContext);
         return expressionHandler;
     }
 
     @Bean
-    public OpenAPI openAPI(){
+    public OpenAPI openAPI() {
         return new OpenAPI()
-                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                .addSecurityItem(new SecurityRequirement()
+                        .addList("bearerAuth"))
                 .components(
                         new Components()
                                 .addSecuritySchemes("bearerAuth",
-                                        new SecurityScheme().type(SecurityScheme.Type.HTTP)
+                                        new SecurityScheme()
+                                                .type(SecurityScheme.Type.HTTP)
                                                 .scheme("bearer")
                                                 .bearerFormat("JWT"))
                 )
@@ -78,7 +81,8 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain filterChain(final HttpSecurity httpSecurity)
+            throws Exception {
         httpSecurity
                 .csrf().disable()
                 .cors()
@@ -88,11 +92,15 @@ public class ApplicationConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(((request, response, authException) -> {
-                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                .authenticationEntryPoint(((request,
+                                            response, authException)
+                        -> {
+                    response.setStatus(HttpStatus
+                            .UNAUTHORIZED.value());
                     response.getWriter().write("Unauthorized.");
                 }))
-                .accessDeniedHandler(((request, response, accessDeniedException) -> {
+                .accessDeniedHandler(((request, response,
+                                       accessDeniedException) -> {
                     response.setStatus(HttpStatus.FORBIDDEN.value());
                     response.getWriter().write("Unauthorized");
                 }))
@@ -104,16 +112,18 @@ public class ApplicationConfig {
                 .anyRequest().authenticated()
                 .and()
                 .anonymous().disable()
-                .addFilterBefore(new JwtTokenFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtTokenFilter(tokenProvider),
+                        UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
 
     }
 
     @Bean
-    public MinioClient minioClient(){
+    public MinioClient minioClient() {
         return MinioClient.builder()
                 .endpoint(minioProperties.getUrl())
-                .credentials(minioProperties.getAccessKey(),minioProperties.getSecretKey())
+                .credentials(minioProperties.getAccessKey(),
+                        minioProperties.getSecretKey())
                 .build();
     }
 }

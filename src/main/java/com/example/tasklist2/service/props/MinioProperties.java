@@ -15,6 +15,4 @@ public class MinioProperties {
     private String secretKey;
 
 
-
-
 }

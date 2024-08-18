@@ -14,5 +14,4 @@ public class JwtProperties {
     private long refresh;
 
 
-
 }

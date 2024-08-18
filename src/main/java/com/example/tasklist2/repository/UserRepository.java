@@ -2,8 +2,6 @@ package com.example.tasklist2.repository;
 
 
 import com.example.tasklist2.domain.user.User;
-
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,7 +20,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
                                       WHERE user_id = :userId
                                         AND task_id = :taskId)
                         """, nativeQuery = true)
-    boolean isTaskOwner(@Param("userId") Long userId, @Param("taskId") Long taskId);
+    boolean isTaskOwner(@Param("userId") Long userId,
+                        @Param("taskId") Long taskId);
 
 
 }

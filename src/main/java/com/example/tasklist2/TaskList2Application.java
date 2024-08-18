@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 public class TaskList2Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TaskList2Application.class, args);
-	}
+    public static void main(final String[] args) {
+        SpringApplication.run(TaskList2Application.class, args);
+    }
 
 }
